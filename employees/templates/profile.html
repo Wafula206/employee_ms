@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="dashboard-container">
+    {% if employee %}
+    <div class="profile-section">
+        <div class="profile-card">
+            <div class="profile-pic">
+                <img src="{% static 'employees/default-profile.png' %}" alt="Profile Picture" />
+            </div>
+            <div class="profile-info">
+                <h3>{{ user.get_full_name|default:user.username }}</h3>
+                <p><b>Position:</b> {{ employee.position }}</p>
+                <p><b>Department:</b> {{ employee.department }}</p>
+            </div>
+        </div>
+        <div class="personal-info">
+            <h3>Personal Information</h3>
+            <table>
+                <tr><th>Employee ID:</th><td>{{ employee.id }}</td></tr>
+                <tr><th>Full Name:</th><td>{{ employee.first_name }} {{ employee.last_name }}</td></tr>
+                <tr><th>Email:</th><td>{{ employee.email }}</td></tr>
+                <tr><th>Gender:</th><td>{{ employee.get_gender_display }}</td></tr>
+                <tr><th>Phone Number:</th><td>{{ employee.phone }}</td></tr>
+                <tr><th>Hire Date:</th><td>{{ employee.hire_date }}</td></tr>
+                <tr><th>Status:</th><td>{{ employee.status }}</td></tr>
+            </table>
+        </div>
+    </div>
+    {% else %}
+    <div class="profile-section">
+        <p>No employee profile found for your account. Please contact the administrator.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
