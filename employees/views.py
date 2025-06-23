@@ -2,13 +2,16 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Employee
 from .forms import EmployeeForm
+from django.db.models import Q
 
 @login_required
 def profile(request):
-    try:
-        employee = Employee.objects.get(email=request.user.email)
-    except Employee.DoesNotExist:
-        employee = None
+    employee = None
+    if request.user.is_authenticated:
+        try:
+            employee = Employee.objects.get(user=request.user)
+        except Employee.DoesNotExist:
+            employee = None
     return render(request, 'profile.html', {'employee': employee})
 
 def is_staff(user):
@@ -22,7 +25,7 @@ def employee_list(request):
 @user_passes_test(is_staff)
 def employee_create(request):
     if request.method == 'POST':
-        form = EmployeeForm(request.POST)
+        form = EmployeeForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('employee_list')
@@ -34,7 +37,7 @@ def employee_create(request):
 def employee_update(request, pk):
     employee = get_object_or_404(Employee, pk=pk)
     if request.method == 'POST':
-        form = EmployeeForm(request.POST, instance=employee)
+        form = EmployeeForm(request.POST, request.FILES, instance=employee)
         if form.is_valid():
             form.save()
             return redirect('employee_list')
@@ -54,7 +57,7 @@ def home(request):
     employee = None
     if request.user.is_authenticated:
         try:
-            employee = Employee.objects.get(email=request.user.email)
+            employee = Employee.objects.get(user=request.user)
         except Employee.DoesNotExist:
             employee = None
     return render(request, 'home.html', {'employee': employee})

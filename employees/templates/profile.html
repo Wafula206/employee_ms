@@ -6,7 +6,11 @@
     <div class="profile-section">
         <div class="profile-card">
             <div class="profile-pic">
-                <img src="{% static 'employees/default-profile.png' %}" alt="Profile Picture" />
+                {% if employee.profile_pic %}
+                    <img src="{{ employee.profile_pic.url }}" alt="Profile Picture" />
+                {% else %}
+                    <img src="{% static 'employees/default-profile.png' %}" alt="Profile Picture" />
+                {% endif %}
             </div>
             <div class="profile-info">
                 <h3>{{ user.get_full_name|default:user.username }}</h3>
