@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Delete Employee</h2>
-<p>Are you sure you want to delete {{ employee }}?</p>
+<h2>Confirm Delete Payroll</h2>
+<p>Are you sure you want to delete this payroll record?</p>
 <form method="post">
     {% csrf_token %}
     <button type="submit" class="logout-btn">Yes, delete</button>
-    <a href="{% url 'employee_list' %}" class="add-btn">Cancel</a>
+    <a href="{% url 'payroll_list' %}" class="add-btn">Cancel</a>
 </form>
 {% endblock %}

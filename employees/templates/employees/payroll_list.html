@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Payroll Records</h2>
+<a href="{% url 'payroll_create' %}" class="add-btn">Add Payroll</a>
+<table class="employee-table">
+    <tr>
+        <th>Employee</th>
+        <th>Period</th>
+        <th>Net Pay</th>
+        <th>Date Processed</th>
+        <th>Actions</th>
+    </tr>
+    {% for payroll in payrolls %}
+    <tr>
+        <td>{{ payroll.employee }}</td>
+        <td>{{ payroll.pay_period_start }} - {{ payroll.pay_period_end }}</td>
+        <td>{{ payroll.net_pay }}</td>
+        <td>{{ payroll.date_processed }}</td>
+        <td>
+            <a href="{% url 'payroll_detail' payroll.pk %}">View</a> |
+            <a href="{% url 'payroll_update' payroll.pk %}">Edit</a> |
+            <a href="{% url 'payroll_delete' payroll.pk %}">Delete</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="5">No payroll records found.</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

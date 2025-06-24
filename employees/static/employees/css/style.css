@@ -177,3 +177,60 @@ button:hover, input[type="submit"]:hover {
 .personal-info tr:nth-child(even) td {
     background: #fafbfc;
 }
+
+<!-- footer-->
+.site-footer {
+    width: 100%;
+    background: #343a40;
+    color: #fff;
+    text-align: center;
+    padding: 1em 0;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    font-size: 0.95em;
+    margin-top: 40px;
+}
+.site-footer a {
+    color: #ffc107;
+    text-decoration: none;
+    margin: 0 0.5em;
+}
+.site-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Sticky footer support */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex: 1;
+}
+
+.header-images {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 250px;
+    width: 100%;
+    margin: 20px auto 10px auto;
+    padding: 10px 40px;
+    background: #e3f0ff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.header-img {
+    height: 250px;          /* Make images smaller */
+    width: auto;
+    border-radius: 8px;
+    background: #fff;
+    padding: 2px;
+}

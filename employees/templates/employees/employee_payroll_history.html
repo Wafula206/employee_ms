@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Payroll History</h2>
+<table class="employee-table">
+    <tr>
+        <th>Period</th>
+        <th>Basic Salary</th>
+        <th>Allowances</th>
+        <th>Deductions</th>
+        <th>Net Pay</th>
+        <th>Payment Mode</th>
+        <th>Date Processed</th>
+    </tr>
+    {% for payroll in payrolls %}
+    <tr>
+        <td>{{ payroll.pay_period_start }} - {{ payroll.pay_period_end }}</td>
+        <td>{{ payroll.basic_salary }}</td>
+        <td>{{ payroll.allowances }}</td>
+        <td>{{ payroll.deductions }}</td>
+        <td>{{ payroll.net_pay }}</td>
+        <td>{{ payroll.get_mode_display }}</td>
+        <td>{{ payroll.date_processed }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="7">No payroll records found.</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

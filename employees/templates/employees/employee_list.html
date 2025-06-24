@@ -4,7 +4,11 @@
 <a href="{% url 'employee_create' %}" class="add-btn">Add Employee</a>
 <table class="employee-table">
     <tr>
-        <th>Name</th><th>Email</th><th>Department</th><th>Position</th><th>Actions</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Department</th>
+        <th>Position</th>
+        <th>Actions</th>
     </tr>
     {% for employee in employees %}
     <tr>
@@ -16,6 +20,10 @@
             <a href="{% url 'employee_update' employee.pk %}">Edit</a>
             <a href="{% url 'employee_delete' employee.pk %}">Delete</a>
         </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="5">No employees found.</td>
     </tr>
     {% endfor %}
 </table>

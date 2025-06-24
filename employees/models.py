@@ -32,14 +32,28 @@ class Employee(models.Model):
         return f"{self.first_name} {self.last_name}"
 
 class Payroll(models.Model):
+    PAYMENT_MODES = [
+        ('phone', 'Phone (Mobile Money)'),
+        ('bank', 'Bank Transfer'),
+        ('cash', 'Cash'),
+    ]
     employee = models.ForeignKey('Employee', on_delete=models.CASCADE)
     pay_period_start = models.DateField()
     pay_period_end = models.DateField()
     basic_salary = models.DecimalField(max_digits=10, decimal_places=2)
     allowances = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     deductions = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    net_pay = models.DecimalField(max_digits=10, decimal_places=2)
+    net_pay = models.DecimalField(max_digits=10, decimal_places=2, editable=False)
+    mode = models.CharField(max_length=10, choices=PAYMENT_MODES, default='phone')
+    phone_number = models.CharField(max_length=15, null=True, blank=True)
     date_processed = models.DateField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('employee', 'pay_period_start', 'pay_period_end')
+
+    def save(self, *args, **kwargs):
+        self.net_pay = self.basic_salary + self.allowances - self.deductions
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.employee} - {self.pay_period_start} to {self.pay_period_end}"

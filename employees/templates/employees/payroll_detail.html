@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Payroll Detail</h2>
+<div class="personal-info">
+    <table>
+        <tr><th>Employee:</th><td>{{ payroll.employee }}</td></tr>
+        <tr><th>Period:</th><td>{{ payroll.pay_period_start }} - {{ payroll.pay_period_end }}</td></tr>
+        <tr><th>Basic Salary:</th><td>{{ payroll.basic_salary }}</td></tr>
+        <tr><th>Allowances:</th><td>{{ payroll.allowances }}</td></tr>
+        <tr><th>Deductions:</th><td>{{ payroll.deductions }}</td></tr>
+        <tr><th>Net Pay:</th><td>{{ payroll.net_pay }}</td></tr>
+        <tr><th>Payment Mode:</th><td>{{ payroll.get_mode_display }}</td></tr>
+        <tr><th>Date Processed:</th><td>{{ payroll.date_processed }}</td></tr>
+    </table>
+</div>
+<a href="{% url 'payroll_list' %}" class="add-btn">Back to Payroll List</a>
+{% endblock %}

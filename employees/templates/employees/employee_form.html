@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Employee</h2>
-<form method="post">
+<form method="post" enctype="multipart/form-data" class="form">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save</button>
-    <a href="{% url 'employee_list' %}">Cancel</a>
+    <a href="{% url 'employee_list' %}" class="add-btn">Cancel</a>
 </form>
 {% endblock %}
