@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<h2>Welcome to the Employee Portal</h2>
-{% if employee %}
-    <p>Hello, {{ employee.first_name }} {{ employee.last_name }}!</p>
-    <a href="{% url 'profile' %}" class="add-btn">My Profile</a>
-    <a href="{% url 'employee_payroll_history' %}" class="add-btn">My Payroll History</a>
-{% else %}
-    <p>Please <a href="{% url 'login' %}" class="add-btn">log in</a> to access your profile.</p>
-{% endif %}
+<div class="home-center">
+    <h2>Welcome to the Employee Portal</h2>
+    <div class="header-images">
+        <img src="{% static 'employees/img/logo1.png' %}" alt="Logo 1" class="header-img left-logo">
+    </div>
+    {% if employee %}
+        <p>Hello, {{ employee.first_name }} {{ employee.last_name }}!</p>
+        <a href="{% url 'profile' %}" class="add-btn">My Profile</a>
+        <a href="{% url 'employee_payroll_history' %}" class="add-btn">My Payroll History</a>
+    {% else %}
+        <p>Please <a href="{% url 'login' %}" class="add-btn">log in</a> to access your profile.</p>
+    {% endif %}
+</div>
 {% endblock %}
